@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid-x grid-padding-x">
+  <div class="large-8 medium-10 small-12 large-offset-2 medium-offset-1 cell">
+    {% if user.is_authenticated %}
+  <div>
+    {% if not registered %}
+      <h3>Hi {{ request.user.username }}.</h3>
+      <a href="/tutorForm/" class="btn btn-primary">Register tutor</a>
+    {% else %}
+      <h3>Hi {{ request.user.username }}.</h3>
+    {% endif %}
+    <p></p>
+  </div>
+  {% else %}
+      <h1>Login to use tutor service!</h1>
+  {% endif %}
+    <div class="st-default-search-input">
+      <form method="get" action="{% url 'searchTutor' %}">
+        <input class="form-control" type="text" placeholder="Search the category you wannt get tutored for..." aria-label="Search" name="b" value="{{b}}">
+      </form>
+    </div>
+  </div>
+</div>
+</br>
+<div class="grid-x grid-padding-x">
+  <div class="large-8 medium-10 small-12 large-offset-2 medium-offset-1 cell">
+    {% for tutor in tutors %}
+      <div class="card-info info">
+        <div class="card-info-content">
+          <p></p>
+          <a href="/tutor_chat/{{ tutor.author }}" class="h3">{{ tutor.author }}</a>
+          <p></p>
+          <a href="/tutor_chat/{{ tutor.author }}" class="h4">{{ tutor.education }}</a>
+          </br></br>
+          <a href="/tutor_chat/{{ tutor.author }}" class="h5">"{{ tutor.description }}"</a>
+          <p></p>
+          {% if tutor.category %}
+            <a href="/searchTutor/?b={{ tutor.category }}" class="badge badge-primary">Category: {{ tutor.category }}</a>
+          {% endif %}
+          {% if request.user == tutor.author %}
+            <a style="margin-left: 700px;">
+              <a href="/tutor/{{ tutor.id }}/1/" class="btn btn-danger">delete</a>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<nav align="center" aria-label="Page navigation">
+  <ul class="pagination">
+    <li></li>
+    {% if tutors.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ tutors.previous_page_number }}"><</a></li>
+    {% else %}
+      <li class="page-item"><a class="page-link"><</a></li>
+    {% endif %}
+    {% for num in tutors.paginator.page_range %}
+      {% if tutors.number == num %}
+        <li class="page-item active"><a class="page-link"><strong>{{ num }}</strong></a></li>
+      {% elif num > tutors.number|add:'-3' and num < tutors.number|add:'3' %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if tutors.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ tutors.next_page_number }}">></a></li>
+    {% else %}
+      <li class="page-item"><a class="page-link">></a></li>
+    {% endif %}
+    <li></li>
+  </ul>
+</nav>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="grid-x grid-padding-x">
+  <div class="large-10 medium-10 small-12 large-offset-1 medium-offset-1 cell">
+    <div class="card-info info">
+      <div class="card-info-content">
+        <p><font size="4">{{ quest.suggestion|linebreaks }}</font></p>
+        <img src="/media/{{ quest.image }}" alt="{{ quest.image_description }}">
+        <p align="right">Asked by: {{ quest.author }}</p>
+        <p align="right">created on: {{ quest.created_on }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="grid-x grid-padding-x">
+  <div class="large-10 medium-10 small-12 large-offset-1 medium-offset-1 cell">
+    {% for comm in answer_list %}
+      <div class="card-info info">
+        <div class="card-info-content">
+          <p><font size="4">{{ comm.comment|linebreaks }}</font></p>
+          <div align="right">
+            <p>Answered by: {{ comm.author }}</p>
+            <p>Created on: {{ comm.created_on }}</p>
+          </div>
+          {% if request.user == comm.author %}
+            <div align="right">
+              <span class="label label-primary">+{{ comm.upvote }}</span>
+              <a href="/answer/{{ comm.id }}/1/" class="btn btn-danger">delete</a>
+            </div>
+          {% else %}
+            <div align="right">
+              <span class="label label-primary">+{{ comm.upvote }}</span>
+              <a href="/upvote/{{ comm.id }}"><button type="button" class="glyphicon glyphicon-thumbs-up"></button></a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="grid-x grid-padding-x">
+  <div class="large-10 medium-10 small-12 large-offset-1 medium-offset-1 cell">
+    <h3 class="text-center">Answer the question</h3>
+    <form action="/answer/{{ sugg_id }}/" method="post">
+      {% csrf_token %}
+
+      {{ form.errors }}
+      <label>{{ form.comment.label_tag }}</label>
+      <font size="4">{{ form.comment }}</font>
+      <input type="submit" class="btn btn-primary btn-lg btn-block" value="Post Answer" />
+    </form>
+  </div>
+</div>
+<br><br><br><br>
+{% endblock %}

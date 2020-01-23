@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.jumbotron {
+   padding: 40px;
+   background-color: #EFF5F9;
+}
+</style>
+<div class="jumbotron text-center">
+    <h1>{{variable}}</h1>
+    <p>{{variable2}}</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="/qna/"><img src="{% static 'image/qna.jpg' %}" class="rounded mx-auto d-block" alt="qna"></a>
+            <h3>Question & Answer</h3>
+            <p>Ask questions if you don't know anything while studying.</p>
+            <p>Share your knowledge with others.</p>
+        </div>
+        <div class="col-sm-4">
+            <a href="/tutor/"><img src="{% static 'image/tutor.jpg' %}" class="rounded mx-auto d-block" alt="tutor"></a>
+            <h3>Tutor</h3>
+            <p>Online tutors are available in a wide array of subjects and topics to help you wherever you need.</p>
+            <p>Do you have one-time question or need a repeating session with a tutor? Start with figuring out what kind of help you need.</p>
+        </div>
+        <div class="col-sm-4">
+            <a href="/about/"><img src="{% static 'image/about.jpg' %}" class="rounded mx-auto d-block" alt="about"></a>
+            <h3>About</h3>        
+            <p>Wanna know about this website?</p>
+            <p>Here is what you want!</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

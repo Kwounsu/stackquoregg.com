@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.jumbotron {
+   padding: 40px;
+   background-color: #EFF5F9;
+}
+.container{
+  background-color:white
+}
+</style>
+<div class="jumbotron text-center">
+    <h1>About Stack Quoregg</h1>
+    <p>We are not just a copycat of Stack Overflow, Quora and Chegg. It is actually a downgrade version of thoes websites! :)</p> 
+</div>
+
+<div class="container">
+  <div class="large-4 medium-4 small-6 large-offset-1 medium-offset-1 cell">
+    <h2>Introduction of the Stack Quoregg</h2>
+    <p>The website is the final project, Kwounsu Lee has created to pass the web programming class, CINS465.</p>
+    <p>Nothing to tell you more..</p>
+    <p>Oh! And this is how the logo of Stack Quoregg created.</p>
+    <img src="{% static 'image/logocomb.png' %}" alt="logocomb"></a>
+    <p>There are two main contents in this website to help people share their knowledge.</p>
+    <p>You can post questions and answer to them by comments in "Q & A". Upvote for the good answers to give them credit!</p>
+    <p>You can also ask questions to people with chatting in "Tutor". People can enter the chat room through tutor registration post in Tutor.</p> 
+    <p>But this is not a individual separated chat room. Becuase the spirit of Stack Quoregg is 'to share knowledge'!</p>
+    <p>Therefore, everyone will be joined to the chat and the conversations will be gone.</p>
+  </div>
+</div>
+{% endblock %}
